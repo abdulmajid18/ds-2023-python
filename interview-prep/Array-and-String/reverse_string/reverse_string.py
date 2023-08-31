@@ -38,7 +38,7 @@ class Solution:
             stop -= 1
 
     def rev_inplace(self, s: str):
-        s = list(s)
+        s = list(s) 
         print(s)
         start, stop = 0, len(s) - 1
         self.reverse(s, start, stop)

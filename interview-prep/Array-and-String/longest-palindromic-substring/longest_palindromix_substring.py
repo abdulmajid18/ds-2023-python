@@ -40,6 +40,10 @@ class Solution:
 
 
 def main():
+    schema="a"
+    table="b"
+    x = f"* from {schema}.{table}"
+    print(x)
     s = Solution()
     result = s.longest_palindrome("babad")
     print(result)
