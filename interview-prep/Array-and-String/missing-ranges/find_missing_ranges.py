@@ -46,8 +46,10 @@ class Solution2:
 def main():
     solution = Solution2()
     elements = [0, 1, 3, 50, 75]
-    ranges = solution.findMissingRanges(elements, 0, 99)
-    print(ranges)
+    for a, b in pairwise(elements):
+        print(f"a ---> {a}    b ----> {b}")
+    # ranges = solution.findMissingRanges(elements, 0, 99)
+    # print(ranges)
 
 
 if __name__ == '__main__':
