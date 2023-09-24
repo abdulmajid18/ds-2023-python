@@ -1,8 +1,8 @@
 class Node:
 
-    def __int__(self, data=None, next=None):
+    def __int__(self, data=None, next_node: 'Node' = None):
         self.data = data
-        self.next = next
+        self.next = next_node
 
     def set_data(self, data):
         self.data = data
@@ -24,6 +24,7 @@ class LinkedList(object):
     def __int__(self, node: Node = None):
         self.length = 0
         self.head = node
+        self.tail = None
 
     def length(self):
         current = self.head
@@ -66,7 +67,7 @@ class LinkedList(object):
                     new_node.data = data
                     count = 1
                     current = self.head
-                    while count < pos-1:
+                    while count < pos - 1:
                         count += 1
                         current = current.next
                     new_node.next = current.next
