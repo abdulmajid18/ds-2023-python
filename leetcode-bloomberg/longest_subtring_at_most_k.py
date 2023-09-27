@@ -31,6 +31,29 @@ def length_of_longest_substring_k_distinct(s, k):
 
     return max_length
 
+
+def length_of_longest_substring_two_distinct(s):
+    count = [0] * 256  # Initialize an array to store character counts
+    i = 0  # Left pointer
+    num_distinct = 0  # Number of distinct characters
+    max_len = 0  # Maximum length of the substring
+
+    for j in range(len(s)):
+        if count[ord(s[j])] == 0:
+            num_distinct += 1
+        count[ord(s[j])] += 1
+
+        while num_distinct > 2:
+            count[ord(s[i])] -= 1
+            if count[ord(s[i])] == 0:
+                num_distinct -= 1
+            i += 1
+
+        max_len = max(j - i + 1, max_len)
+
+    return max_len
+
+
 # Example usage:
 s = "eceba"
 k = 2
