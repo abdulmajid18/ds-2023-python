@@ -13,8 +13,21 @@ def longest_1(string):
 
 
 def longest_2(string):
-    char_set = set()
+    exists = [False] * 256
+    i = 0
+    max_len = 0
+    for j in range(len(string)):
+        while exists[ord(string[j])]:
+            exists[ord(string[j])] = False
+            i += 1
+        exists[ord(string[j])] = True
+        max_len = max(max_len, j - i + 1)
+    return max_len
 
+
+if __name__ == '__main__':
+    ans = longest_2('bbbb')
+    print(ans)
 # public int lengthOfLongestSubstring(String s) {
 #  boolean[] exist = new boolean[256];
 #  int i = 0, maxLen = 0;
