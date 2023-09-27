@@ -19,7 +19,7 @@ class Solution:
             else:
                 cur = elements[i]
             if cur - prev >= 2:
-                ranges.append(self.get_range(prev + 1, start - 1))
+                ranges.append(self.get_range(prev + 1, cur - 1))
             prev = cur
         return ranges
 
