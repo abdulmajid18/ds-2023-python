@@ -17,6 +17,22 @@ def reverse_int(x: int):
         res = (res * 10) + digit
     return res
 
+
+def reverse(x):
+    ret = 0
+    INT_MAX = 2 ** 31 - 1
+    INT_MIN = -2 ** 31
+
+    while x != 0:
+        # Handle overflow/underflow
+        if abs(ret) > INT_MAX // 10 or (abs(ret) == INT_MAX // 10 and x % 10 != 0):
+            return 0
+
+        ret = ret * 10 + x % 10
+        x //= 10
+
+    return ret
+
 if __name__ == '__main__':
-    ans = reverse_int(123)
+    ans = reverse(123)
     print(ans)
