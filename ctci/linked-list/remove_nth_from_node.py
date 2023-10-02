@@ -1,3 +1,8 @@
+"""  We use two iterators to traverse the list. The first iterator is advanced by k steps, and then the
+two iterators advance in tandem. When the first iterator reaches the tail, the second iterator is at
+the (k + 1)th last node, and we can remove the kth node. """
+
+
 class ListNode:
     def __int__(self, val=0, next=None):
         self.val = val
@@ -19,6 +24,22 @@ def remove_nth_from_end(head: ListNode, n: int):
 
     left.next = left.next.next
     return dummy.next
+
+
+def remove_nth_from_end_4(head: ListNode, n: int):
+    dummy_head: ListNode = ListNode(0,head)
+    first = dummy_head.head.next
+    for _ in range(n):
+        first = first.nextr
+
+    second = dummy_head
+    while first:
+        first, second = first.next, second.next
+
+    second.next = second.next.next
+    return dummy_head.next
+
+
 
 
 def remove_nth_from_end_1(head: ListNode, n: int):
@@ -66,4 +87,3 @@ def remove_nth_from_end_3(head: ListNode, n: int):
     left.next = left.next.next
 
     return head  # Return the updated linked list
-
