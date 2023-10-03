@@ -66,22 +66,16 @@ class Solution:
 
     def rev_inplace(self, s: str):
         s = list(s)
-        print(s)
         start, stop = 0, len(s) - 1
         self.reverse(s, start, stop)
-        print("First")
-        print(s)
         start = stop = 0
         while stop < len(s):
             if s[stop] == ' ':
                 self.reverse(s, start, stop - 1)
                 start = stop + 1
             stop += 1
-        print("Second")
-        print(s)
         self.reverse(s, start, stop - 1)
-        print("Third")
-        print(s)
+
 def main():
     S = "geeks quiz practice code"
     solution = Solution()
