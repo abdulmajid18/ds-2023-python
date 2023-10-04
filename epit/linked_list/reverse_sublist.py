@@ -21,7 +21,7 @@ def reverse_sublist(L: ListNode, start, finish):
 def reverseBetween(self, head: Optional[ListNode], left: int, right: int) -> Optional[ListNode]:
     if not head:
         return None
-
+    #  given 1 ->  2  ->  3 -> 4 -> 5
     dummy_head = ListNode(0)
     dummy_head.next = head
     sublist_head = dummy_head
@@ -29,10 +29,11 @@ def reverseBetween(self, head: Optional[ListNode], left: int, right: int) -> Opt
     # Move sublist_head to the node just before the start position
     for _ in range(1, left):
         sublist_head = sublist_head.next
-
+    # 2 -> 3 -> 4
     # Reverse the sublist
     sublist_iter = sublist_head.next
     for _ in range(right - left):
+        #  save the pointer to preserve 3 -> 4
         temp = sublist_iter.next
         sublist_iter.next = temp.next
         temp.next = sublist_head.next
