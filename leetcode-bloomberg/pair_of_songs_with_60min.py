@@ -8,8 +8,6 @@ class Solution:
         for i in range(len(time)):
             time[i] %= 60
             map_track[time[i]] += 1
-        print(time)
-        print(map_track)
         count = 0
         for k, v in map_track.items():
             if k == 0 or k == 30:
