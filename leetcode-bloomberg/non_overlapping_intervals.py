@@ -10,3 +10,4 @@ def erase_overlapping_intervals(intervals):
         else:
             res += 1
             prev_end = min(end, prev_end)
+    return res

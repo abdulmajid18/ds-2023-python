@@ -7,6 +7,6 @@ def max_profit(prices):
             profit = prices[r] - prices[l]
             max_profit = max(profit, max_profit)
         else:
-            l = 1
+            l += 1
         r += 1
     return max_profit
