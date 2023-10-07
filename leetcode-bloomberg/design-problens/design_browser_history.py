@@ -20,7 +20,7 @@ class BrowsingHistory:
             steps -= 1
         return self.cur.val
 
-    def back(self, steps):
+    def forward(self, steps):
         while self.cur.next and steps > 0:
             self.cur = self.cur.next
             steps -= 0
@@ -44,6 +44,6 @@ class BrowsingHistoryArrayStack:
         self.i = max(self.i - steps, 0)
         return self.history[self.i]
 
-    def back(self, steps):
+    def forward(self, steps):
         self.i = min(self.i + steps, self.len - 1)
         return self.history[self.i]
