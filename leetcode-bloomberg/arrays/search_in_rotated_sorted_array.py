@@ -17,7 +17,7 @@ def search_rotated_array(nums, target):
             if target < nums[m]:
                 r = m - 1
             elif target > nums[r]:
-                r = m - 1
+                r = m - 1 
             else:
                 l = m + 1
     return -1
