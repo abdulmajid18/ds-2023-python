@@ -31,8 +31,20 @@ def two_sum_hashtable(self, elements: list, target: int):
     return None
 
 
+def twoSum3(nums, target):
+    l, r = 0, len(nums) - 1
+    while l < r:
+        current_sum = nums[l] + nums[r]
+        if current_sum == target:
+            return [l + 1, r + 1]
+        elif current_sum < target:
+            l += 1
+        else:
+            r -= 1
+
+
 # Prompt: Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
-def twoSum(self, nums: List[int], target: int) -> List[int]:
+def twoSum4(self, nums: List[int], target: int) -> List[int]:
     nums_dict = {val: idx for idx, val in enumerate(nums)}
     for idx, val in enumerate(nums):
         looking_for = target - val
