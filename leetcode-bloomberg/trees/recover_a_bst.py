@@ -23,20 +23,7 @@ class Solution:
             self.temp[i].val = srt[i]
         return self.temp
 
-    def recoverMorisTraversal(self, root: TreeNode):
-        previousNode: TreeNode = None
-        arr = []
 
-        def inOrder(node: TreeNode):
-            if not node:
-                return
-
-            inOrder(node.left)
-            nonlocal previousNode
-            if previousNode and previousNode.val > node.val:
-                if len(arr) == 0:
-                    arr.append(previousNode)
-            inOrder(node.right)
 
     def reversalMoris(self, root: TreeNode):
         curr = root
