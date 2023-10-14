@@ -8,6 +8,15 @@ def remove_1(elements: List):
     print(result)
     return len(result)
 
+def remove_4(elements):
+    l = 1
+
+    for r in range(1, len(elements)):
+        if elements[r] != elements[r-1]:
+            elements[l] = elements[r]
+            l += 1
+
+    return l + 1
 
 def remove_2(elements: List):
     l = 1
