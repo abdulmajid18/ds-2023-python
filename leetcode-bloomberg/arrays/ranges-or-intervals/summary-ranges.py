@@ -11,9 +11,10 @@ def summaryRange(nums):
 
     if res and len(res[-1]) >= 2:
         res[-1] = [res[-1][0]] + [res[-1][-1]]
-    print(['->'.join(map(str,x)) for x in res])
-    return ['->'.join(map(str,x)) for x in res]
+    print(['->'.join(map(str, x)) for x in res])
+    return ['->'.join(map(str, x)) for x in res]
+
 
 if __name__ == "__main__":
-    nums = [0,1,2,4,5,7]
+    nums = [0, 1, 2, 4, 5, 7]
     summaryRange(nums)
