@@ -23,13 +23,26 @@ def format_range(start, end):
         return str(start) + "->" + str(end)
 
 
-# Example usage:
-nums = [0, 1, 3, 50, 75]
-lower = 0
-upper = 99
-result = findMissingRanges(nums, lower, upper)
-print(result)  # Output: ["2", "4->49", "51->74", "76->99"]
 
+
+class Solution:
+    def get_range(self, start, end):
+        if start == end:
+            return str(start)
+        return str(start) + "->" + str(end)
+
+    def find_ranges(self, elements, start, end):
+        ranges = []
+        prev = start - 1
+        for i in range(len(elements)):
+            if i == len(elements):
+                cur = end + 1
+            else:
+                cur = elements[i]
+            if cur - prev >= 2:
+                ranges.append(self.get_range(prev + 1, cur - 1))
+            prev = cur
+        return ranges
 
 def findMissingRangesB(nums, lower, upper):
     result = []
@@ -62,3 +75,15 @@ def getRange(start, end):
         return str(start)
     else:
         return str(start) + "->" + str(end)
+
+
+if __name__ == "__main__":
+    # Example usage:
+    nums = [0, 1, 3, 50, 75]
+    lower = 0
+    upper = 99
+    result = findMissingRanges(nums, lower, upper)
+    print(result)  # Output: ["2", "4->49", "51->74", "76->99"]
+    # x = Solution()
+    # ans = x.find_ranges(nums, lower, upper)
+    # print(ans)
