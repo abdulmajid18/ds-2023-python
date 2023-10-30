@@ -15,7 +15,7 @@ def minimumSizeBrute2(nums, target):
         currentSum = 0
         for j in range(i, len(nums)):
             currentSum += nums[j]
-            if currentSum == target:
+            if currentSum >= target:
                 length = (j + 1) - i
                 minLength = min(length, minLength)
     return minLength

@@ -18,4 +18,4 @@ def max_subarray_sum(arr):
     for x in arr:
         max_ending_here = max(x, max_ending_here + x)
         max_so_far = max(max_so_far, max_ending_here)
-        return max_so_far
+    return max_so_far
