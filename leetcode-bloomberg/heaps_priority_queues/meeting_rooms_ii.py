@@ -21,7 +21,7 @@ def minMeetingRooms2(intervals):
     if not intervals:
         return 0
 
-    start_times = sorted([interval[0] for interval in intervals])
+    start_times = sorted([interval[0] for interval in intervals]) 
     end_times = sorted([interval[1] for interval in intervals])
 
     res, count = 0, 0
