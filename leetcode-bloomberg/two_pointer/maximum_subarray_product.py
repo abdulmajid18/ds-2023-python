@@ -9,6 +9,7 @@ def maximum_product_subarray(nums):
         if n == 0:
             cur_max = 1
             cur_min = 1
+            continue
         temp = cur_max
         #  we consider adding n to the max and min because we could have [-1,8]
         cur_max = max(n * cur_max, n * cur_min, n)
@@ -42,11 +43,36 @@ def maxSubarrayProduct(arr, n):
     return ans
 
 
+def maxProductTwoPointers(nums):
+    if not nums:
+        return 0
 
-# Driver code
-arr = [1, -2, -3, 0, 7, -8, -2]
-n = len(arr)
-print("Maximum Subarray product is", maxSubarrayProduct(arr, n))
+    max_product = float("-inf")
+    left_max = right_max = 1
+
+    left, right = 0, len(nums) - 1
+
+    # Iterate from left to right
+    while left < len(nums):
+        left_max *= nums[left]
+        max_product = max(max_product, left_max)
+        if left_max == 0:
+            left_max = 1
+        left += 1
+
+    # Reset left_max and iterate from right to left
+    left_max = 1
+
+    while right >= 0:
+        right_max *= nums[right]
+        max_product = max(max_product, right_max)
+        if right_max == 0:
+            right_max = 1
+        right -= 1
+
+    return max_product
+
+
 
 
 def maxSubarrayProduct(arr):
@@ -78,5 +104,26 @@ def maxSubarrayProduct(arr):
     return r
 
 
-arr = [1, -2, -3, 0, 7, -8, -2]
-print("Maximum Subarray Product is", maxSubarrayProduct(arr))
+def maxProduct4(nums):
+    if not nums:
+        return 0
+
+    # Initialize variables to keep track of the maximum and minimum product ending at the current element.
+    max_ending_here = min_ending_here = max_so_far = nums[0]
+
+    for i in range(1, len(nums)):
+        # Swap max_ending_here and min_ending_here if the current element is negative.
+        if nums[i] < 0:
+            max_ending_here, min_ending_here = min_ending_here, max_ending_here
+
+        # Update max_ending_here and min_ending_here based on the current element.
+        max_ending_here = max(nums[i], max_ending_here * nums[i])
+        min_ending_here = min(nums[i], min_ending_here * nums[i])
+
+        # Update max_so_far with the maximum value seen so far.
+        max_so_far = max(max_so_far, max_ending_here)
+
+    return max_so_far
+
+
+

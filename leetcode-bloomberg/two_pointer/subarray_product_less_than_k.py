@@ -19,6 +19,7 @@ def numSubarrayProductLessThanK(nums, k):
 
     return count
 
+
 # Example usage:
 nums = [10, 5, 2, 6]
 k = 100
