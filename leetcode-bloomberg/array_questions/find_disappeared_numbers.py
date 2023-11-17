@@ -1,0 +1,14 @@
+def findDisappearedNumbers(nums):
+    # Create a set of the given numbers
+    num_set = set(nums)
+
+    # Initialize a list to store missing numbers
+    missing_numbers = []
+
+    # Iterate through the range [1, n]
+    for i in range(1, len(nums) + 1):
+        # If the current number is not in the set, it is missing
+        if i not in num_set:
+            missing_numbers.append(i)
+
+    return missing_numbers
