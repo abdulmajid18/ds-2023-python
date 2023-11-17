@@ -12,3 +12,16 @@ def findDisappearedNumbers(nums):
             missing_numbers.append(i)
 
     return missing_numbers
+
+
+nums = [4, 3, 2, 7, 8, 2, 1]
+result = findDisappearedNumbers(nums)
+print(result)  # Output: [5, 6]
+
+nums = [1, 1]
+result = findDisappearedNumbers(nums)
+print(result)  # Output: [2]
+
+nums = [2, 2]
+result = findDisappearedNumbers(nums)
+print(result)  # Output: [1]
