@@ -12,7 +12,7 @@ def isSubtree(s: TreeNode, t: TreeNode):
         return False
     if sameTree(s, t):
         return True
-    return isSubtree(s.left, t) and isSubtree(s.right, t)
+    return isSubtree(s.left, t) or isSubtree(s.right, t)
 
 
 def sameTree(s: TreeNode, t: TreeNode):
