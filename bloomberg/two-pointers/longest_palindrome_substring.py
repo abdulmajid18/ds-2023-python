@@ -5,6 +5,7 @@ def longest_palindrome(self, string):
     max_length = len(string)
 
     for i in range(max_length):
+        # odd length
         l = i
         r = i
         while l >= 0 and r < max_length and string[l] == string[r]:
@@ -14,6 +15,7 @@ def longest_palindrome(self, string):
             l -= 1
             r += 1
 
+        # even length
         l = i
         r = i + 1
         while l >= 0 and r < max_length and string[l] == string[r]:
