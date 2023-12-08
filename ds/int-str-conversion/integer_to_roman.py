@@ -51,4 +51,3 @@ def intRomanTwoOptimized(num):
     return res
 
 
-intRomanTwo([2])
