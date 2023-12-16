@@ -34,7 +34,7 @@ def mergeKLists(lists: List[ListNode]):
     while len(lists) > 1:
         mergedLists = []
 
-        for i in range(0, len(lists)):
+        for i in range(0, len(lists),2):
             l1 = lists[i + 1]
             l2 = lists[i + 1] if (i + 1) < len(lists) else None
             mergedLists.append(mergeList(l1, l2))
