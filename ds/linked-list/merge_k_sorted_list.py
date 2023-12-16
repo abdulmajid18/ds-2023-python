@@ -1,4 +1,5 @@
 import heapq
+from typing import List
 
 
 class ListNode:
@@ -7,7 +8,41 @@ class ListNode:
         self.next = next
 
 
-def merge_k_sorted_lists(lists):
+def mergeList(l1, l2):
+    dummy = ListNode()
+    tail = dummy
+
+    while l1 and l2:
+        if l1.val < l2.val:
+            tail.next = l1
+            l1 = not l1
+        else:
+            tail.next = l2
+            l2 = l2.next
+        tail = tail.next
+    if l1:
+        tail.next = l1
+    if l2:
+        tail.next = l2
+    return dummy.next
+
+
+def mergeKLists(lists: List[ListNode]):
+    if not lists or len(lists) == 0:
+        return None
+
+    while len(lists) > 1:
+        mergedLists = []
+
+        for i in range(0, len(lists)):
+            l1 = lists[i + 1]
+            l2 = lists[i + 1] if (i + 1) < len(lists) else None
+            mergedLists.append(mergeList(l1, l2))
+        lists = mergedLists
+    return lists[0]
+
+
+def merge_k_sorted_lists_heap(lists):
     # Create a min heap
     min_heap = []
 
@@ -43,7 +78,7 @@ list3 = ListNode(2, ListNode(6))
 
 lists = [list1, list2, list3]
 
-result = merge_k_sorted_lists(lists)
+result = merge_k_sorted_lists_heap(lists)
 
 # Print the merged result
 while result:
