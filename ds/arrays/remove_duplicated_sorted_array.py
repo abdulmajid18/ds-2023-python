@@ -42,6 +42,34 @@ def remove_3(elements: List):
     return j + 1
 
 
+from typing import List
+
+def remove_duplicates(nums: List[int]) -> int:
+    if not nums:
+        return 0  # Empty array
+
+    # Initialize two pointers
+    i, j = 0, 1
+
+    # Iterate through the array
+    while j < len(nums):
+        # If the current element is different from the previous one
+        if nums[j] != nums[i]:
+            # Move the i pointer forward
+            i += 1
+            # Update the i-th element with the j-th element
+            nums[i] = nums[j]
+        # Move the j pointer forward
+        j += 1
+
+    # The length of the modified array is (i + 1)
+    return i + 1
+
+# Example usage:
+nums = [1, 1, 2, 2, 2, 3, 4, 4, 5, 5, 5, 5]
+result_length = remove_duplicates(nums)
+print("Modified Array:", nums[:result_length])
+
 
 
 
