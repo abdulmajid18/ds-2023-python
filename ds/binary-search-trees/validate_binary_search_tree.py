@@ -64,6 +64,15 @@ def isValidBSTRecursive(node, min_val, max_val):
     return (isValidBSTRecursive(node.left, min_val, node.val) and
             isValidBSTRecursive(node.right, node.val, max_val))
 
+def isValidBSTRecursive2(node, min_val, max_val):
+    if not node:
+        return True
+
+    if not (node.val < min_val and node.val > max_val):
+        return False
+
+    return (isValidBSTRecursive(node.left, min_val, node.val) and
+            isValidBSTRecursive(node.right, node.val, max_val))
 
 # Example usage:
 # Construct a binary tree
