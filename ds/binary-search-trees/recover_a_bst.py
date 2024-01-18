@@ -44,3 +44,29 @@ class Solution:
             curr = temp.right
         replace[0][0].val, replace[-1][1].val = replace[-1][1].val, replace[0][0].val
 
+
+class Solution:
+    def recoverTree(self, root):
+        self.first_element = None
+        self.second_element = None
+        self.prev_element = TreeNode(float('-inf'))
+
+        def inorder_traversal(node):
+            if node:
+                inorder_traversal(node.left)
+
+                # Check if the current node violates the BST property
+                if not self.first_element and self.prev_element.val >= node.val:
+                    self.first_element = self.prev_element
+                if self.first_element and self.prev_element.val >= node.val:
+                    self.second_element = node
+
+                self.prev_element = node
+
+                inorder_traversal(node.right)
+
+        inorder_traversal(root)
+
+        # Swap the values of the two elements to recover the BST
+        if self.first_element and self.second_element:
+            self.first_element.val, self.second_element.val = self.second_element.val, self.first_element.val
