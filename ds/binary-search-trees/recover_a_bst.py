@@ -44,29 +44,41 @@ class Solution:
             curr = temp.right
         replace[0][0].val, replace[-1][1].val = replace[-1][1].val, replace[0][0].val
 
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
 
 class Solution:
-    def recoverTree(self, root):
-        self.first_element = None
-        self.second_element = None
-        self.prev_element = TreeNode(float('-inf'))
+    def recoverTree(self, root: TreeNode) -> None:
+        """
+        Do not return anything, modify root in-place instead.
+        """
+        # Initialize variables to keep track of nodes to be swapped
+        first, second, prev = None, None, None
 
+        # Helper function for in-order traversal to find the misplaced nodes
         def inorder_traversal(node):
-            if node:
-                inorder_traversal(node.left)
+            nonlocal first, second, prev
 
-                # Check if the current node violates the BST property
-                if not self.first_element and self.prev_element.val >= node.val:
-                    self.first_element = self.prev_element
-                if self.first_element and self.prev_element.val >= node.val:
-                    self.second_element = node
+            if not node:
+                return
 
-                self.prev_element = node
+            inorder_traversal(node.left)
 
-                inorder_traversal(node.right)
+            # Check for misplaced nodes
+            if prev and prev.val > node.val:
+                if not first:
+                    first = prev
+                second = node
 
+            prev = node
+
+            inorder_traversal(node.right)
+
+        # Perform in-order traversal to identify misplaced nodes
         inorder_traversal(root)
 
-        # Swap the values of the two elements to recover the BST
-        if self.first_element and self.second_element:
-            self.first_element.val, self.second_element.val = self.second_element.val, self.first_element.val
+        # Swap the values of the misplaced nodes
+        first.val, second.val = second.val, first.val
