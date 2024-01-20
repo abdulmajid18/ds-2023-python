@@ -61,6 +61,7 @@ class Solution:
         # Helper function for in-order traversal to find the misplaced nodes
         def inorder_traversal(node):
             nonlocal first, second, prev
+            # prev = TreeNode(val=float("-inf")
 
             if not node:
                 return
