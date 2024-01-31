@@ -13,6 +13,6 @@ class Solution:
             if not left or not right:
                 return False
             return (left.data == right.data and
-                    dfs(left.left, left.right) and
-                    dfs(right.left, right.right))
+                    dfs(left.left, right.right) and
+                    dfs(left.right, right.left))
         return dfs(root.left, root.right)
