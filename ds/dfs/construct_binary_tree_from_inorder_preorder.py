@@ -19,3 +19,5 @@ class Solution:
         root.left = self.constructTree(preOrder[1:mid + 1], inOrder[:mid])
         root.right = self.constructTree(preOrder[mid + 1:], inOrder[mid:])
         return root
+
+
