@@ -32,7 +32,7 @@ def two_sum_hashtable(self, elements: list, target: int):
 
 
 def twoSum3(nums, target):
-    """ Not input should be sorted"""
+    """ Note input should be sorted"""
     l, r = 0, len(nums) - 1
     while l < r:
         current_sum = nums[l] + nums[r]
