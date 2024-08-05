@@ -11,6 +11,7 @@ def maxAreaBrute(self, height: List[int]) -> int:
             area = max(area, current_area)
     return area
 
+
 def maxArea(self, height: List[int]) -> int:
     res = 0
     n = len(height)
