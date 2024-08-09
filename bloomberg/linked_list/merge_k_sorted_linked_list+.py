@@ -1,12 +1,41 @@
 # Definition for singly-linked list.
+from typing import List, Optional
 import heapq
-from typing import Optional, List
 
 
 class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
         self.next = next
+
+    # Define comparison for heapq to work on ListNode objects
+    def __lt__(self, other):
+        return self.val < other.val
+
+
+class Solution:
+    def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
+        min_heap = []
+
+        # Initialize the heap with the head nodes of all lists
+        for i in range(len(lists)):
+            if lists[i]:
+                heapq.heappush(min_heap, lists[i])
+
+        dummy = ListNode(0)
+        tail = dummy
+
+        while min_heap:
+            # Extract the smallest node from the heap
+            smallest_node = heapq.heappop(min_heap)
+            tail.next = smallest_node
+            tail = tail.next
+
+            # If the extracted node has a next node, push it into the heap
+            if smallest_node.next:
+                heapq.heappush(min_heap, smallest_node.next)
+
+        return dummy.next
 
 
 def mergeKListsHeap(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
@@ -35,8 +64,6 @@ def mergeKListsHeap(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]
             heapq.heappush(min_heap, (node.next.val, i, node.next))
 
     return dummy.next
-
-
 
 class Solution:
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
