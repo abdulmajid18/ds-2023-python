@@ -28,6 +28,7 @@ Finally, to ensure we get the smallest permutation after the swap, I reverse the
 the pivot. Since this part was originally in decreasing order, reversing it puts it in ascending order, making the
 permutation as small as possible. In our example, since there’s only one element after 3, no reversal is needed,
 and the result is [1, 3, 2]."""
+from typing import List
 
 
 class Solution:
