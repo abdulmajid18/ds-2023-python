@@ -13,7 +13,9 @@ class Solution:
                 num = board[r][c]
                 if num == ".":
                     continue
-                if (num in rows[r] or num in cols[c] or num in squares[(r // 3, c // 3)]):
+                if (num in rows[r] or
+                        num in cols[c] or
+                        num in squares[(r // 3, c // 3)] ):
                     return False
                 rows[r].add(num)
                 cols[c].add(num)
