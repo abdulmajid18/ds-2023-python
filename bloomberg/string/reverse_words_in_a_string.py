@@ -39,7 +39,7 @@ def reverseWordsOptimized(s: str) -> str:
 
 
 s = "  the sky is  blue  "
-print(reverseWordsOptimized(s))  # Output: "blue is sky the
+# print(reverseWordsOptimized(s))  # Output: "blue is sky the
 
 
 def reverseWords(s: str) -> str:
@@ -50,7 +50,7 @@ def reverseWords(s: str) -> str:
     n = len(s)
     result = []
     i = 0
-
+    print(s)
     while i < n:
         # Skip spaces
         while i < n and s[i] == ' ':
@@ -76,4 +76,4 @@ def reverseWords(s: str) -> str:
 
 # Example usage:
 s = "  the sky is  blue  "
-# print(reverseWords(s))  # Output: "blue is sky the"
+print(reverseWords(s))  # Output: "blue is sky the"
