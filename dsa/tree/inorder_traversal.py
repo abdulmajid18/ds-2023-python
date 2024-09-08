@@ -15,7 +15,7 @@ class Solution:
         def inorder(root):
             if not root:
                 return
-            inorder(root.left)
+            inorder(root.left) 
             res.append(root.val)
             inorder(root.right)
 
