@@ -26,3 +26,32 @@ def lengthOfLongestSubstringTwoDistinct(s):
 
 s = "eceba"
 print(lengthOfLongestSubstringTwoDistinct(s))  # Output: 3 ("ece")
+
+
+def lengthOfLongestSubstringTwoDistinct(s):
+    if len(s) < 3:
+        return len(s)
+
+    # Create a list of size 128 to store the count of characters in the current window
+    char_count = [0] * 128
+    left = 0
+    max_len = 0
+    distinct_count = 0
+
+    for right in range(len(s)):
+        # Add the current character to the window
+        if char_count[ord(s[right])] == 0:
+            distinct_count += 1
+        char_count[ord(s[right])] += 1
+
+        # If we have more than two distinct characters, shrink the window
+        while distinct_count > 2:
+            char_count[ord(s[left])] -= 1
+            if char_count[ord(s[left])] == 0:
+                distinct_count -= 1
+            left += 1
+
+        # Update the maximum length of the valid substring
+        max_len = max(max_len, right - left + 1)
+
+    return max_len
