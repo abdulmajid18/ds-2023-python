@@ -17,8 +17,13 @@ def isPalindrome(head: ListNode) -> bool:
 
 
 def is_palindrome_array(arr):
-    # Check if an array is a palindrome
-    return arr == arr[::-1]
+    left, right = 0, len(arr) - 1
+    while left < right:
+        if arr[left] != arr[right]:
+            return False
+        left += 1
+        right -= 1
+    return True
 
 
 # Helper function to create a linked list from a list
