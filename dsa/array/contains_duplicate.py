@@ -22,3 +22,12 @@ def containsDuplicateBruteForce(nums):
             if nums[i] == nums[j]:
                 return True
     return False
+
+
+def containsDuplicateHashMap(nums):
+    num_map = {}
+    for num in nums:
+        if num in num_map:
+            return True
+        num_map[num] = 1
+    return False
