@@ -42,3 +42,52 @@ print(isPalindrome(head))  # Output: True
 
 head = create_linked_list([1, 2, 3, 4])
 print(isPalindrome(head))  # Output: False
+
+
+def reverse_list(head: ListNode) -> ListNode:
+    prev = None
+    curr = head
+    while curr:
+        next_node = curr.next
+        curr.next = prev
+        prev = curr
+        curr = next_node
+    return prev
+
+    # Helper function to find the middle of the linked list
+
+
+def find_middle(head: ListNode) -> ListNode:
+    slow = fast = head
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+    return slow
+
+
+def isPalindromeTwoPointer(head: ListNode) -> bool:
+    fast = head
+    slow = head
+
+    # find middle using slow
+    while fast and fast.next:
+        fast = fast.next.next
+        slow = slow.next
+
+    # reverse second halve
+    prev = None
+    while slow:
+        tmp = slow.next
+        slow.next = prev
+        prev = slow
+        slow = tmp
+
+    # check if palindrome
+    left, right = head, prev
+
+    while right:
+        if left.val != right.val:
+            return False
+        left = left.next
+        right = right.next
+    return True
