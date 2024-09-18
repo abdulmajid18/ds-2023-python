@@ -26,3 +26,26 @@ def is_anagram(s: str, t: str) -> bool:
 s1 = "listen"
 s2 = "silent"
 print(is_anagram(s1, s2))  # Output: True
+
+
+def is_anagram(s: str, t: str) -> bool:
+    # If lengths are different, they cannot be anagrams
+    if len(s) != len(t):
+        return False
+
+    # Create an array of size 26 for each string's character count
+    count = [0] * 26
+
+    # Count the frequency of characters in both strings
+    for i in range(len(s)):
+        count[ord(s[i]) - ord('a')] += 1
+        count[ord(t[i]) - ord('a')] -= 1
+
+    # If all counts are zero, they are anagrams
+    return all(c == 0 for c in count)
+
+
+# Example usage
+s1 = "listen"
+s2 = "silent"
+print(is_anagram(s1, s2))  # Output: True
