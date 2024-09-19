@@ -30,3 +30,26 @@ def minMeetingRooms(intervals):
 
     return max_rooms
 
+
+def minMeetingRooms2(intervals):
+    events = []
+
+    # Create a list of start and end events
+    for interval in intervals:
+        events.append((interval[0], 1))  # Meeting starts
+        events.append((interval[1], -1))  # Meeting ends
+
+    # Sort events by time. If times are the same, process end (-1) first
+    events.sort(key=lambda x: (x[0], x[1]))
+
+    count = 0
+    max_rooms = 0
+
+    # Process the events
+    for event in events:
+        count += event[1]  # Increment or decrement the count
+
+        # Track the maximum number of rooms needed
+        max_rooms = max(max_rooms, count)
+
+    return max_rooms
