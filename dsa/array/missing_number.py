@@ -22,3 +22,14 @@ class Solution:
             xor_result ^= num
 
         return xor_result
+
+
+class Solution:
+    def missingNumber2(self, nums):
+        n = len(nums)
+        res = len(nums)
+        for i in range(n):
+            res += (i - nums[i])
+
+        return res
+
