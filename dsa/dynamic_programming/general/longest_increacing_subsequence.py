@@ -1,9 +1,13 @@
-
 def lengthOfLIS(nums):
-    LIS = [1] * len(nums)
+    if not nums:
+        return 0
 
-    for i in range(len(nums)-1, -1, -1):
-        for j in range(i + 1, len(nums)):
-            if nums[i] < nums[j]:
-                LIS[i] = max(LIS[i], 1 + LIS[j])
-    return max(LIS)
+    n = len(nums)
+    dp = [1] * n  # Initialize dp array to 1, as LIS at each position is at least the element itself.
+
+    for i in range(n):
+        for j in range(i):
+            if nums[i] > nums[j]:
+                dp[i] = max(dp[i], dp[j] + 1)
+
+    return max(dp)  # The length of the longest subsequence is the maximum value in dp array.
