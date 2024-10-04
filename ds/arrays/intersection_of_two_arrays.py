@@ -43,3 +43,19 @@ def intersectionTwoPointers(nums1, nums2):
             j += 1
 
     return list(result)
+
+
+def intersectionHashSet(nums1, nums2):
+    # Create a hashmap from nums1
+    count = {}
+    for num in nums1:
+        count[num] = 1
+
+    result = set()
+
+    # Find common elements by checking existence in the hashmap
+    for num in nums2:
+        if num in count:
+            result.add(num)
+
+    return list(result)
