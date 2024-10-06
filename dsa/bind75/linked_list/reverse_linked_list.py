@@ -22,13 +22,15 @@ class Solution:
         return prev
 
     def reverseListRecursive(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        prev = None
-        curr = head
+        # if head is None or it's the last node
+        if not head or not head.next:
+            return head
 
-        while curr:
-            tmp = curr.next
-            curr.next = prev
-            prev = curr
-            curr = tmp
+        # Reverse the rest of the list recursively
+        new_head = self.reverseList(head.next)
 
-        return prev
+        # Reverse the current node
+        head.next.next = head
+        head.next = None
+
+        return new_head
