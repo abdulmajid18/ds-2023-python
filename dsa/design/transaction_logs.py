@@ -71,3 +71,58 @@ for txn in transactions:
 alerts = analyzer.analyze_transactions()
 for alert in alerts:
     print(alert)
+
+import datetime
+from collections import defaultdict
+
+# ... [Previous Transaction and TransactionAnalyzer class definitions remain the same] ...
+
+# Time and Space Complexity Analysis
+
+"""
+Time Complexity Analysis:
+
+1. add_transaction method:
+   - Time Complexity: O(1)
+   - This method performs constant time operations: appending to a list and adding to a defaultdict.
+
+2. analyze_transactions method:
+   - Time Complexity: O(n log n), where n is the total number of transactions
+   - Breaking it down:
+     a. Sorting transactions for each user: O(m log m), where m is the number of transactions per user
+     b. Iterating through sorted transactions: O(m)
+     c. Worst case (all transactions belong to one user): O(n log n)
+   - The method performs these operations for each user, but the total number of transactions processed remains n
+
+Space Complexity Analysis:
+
+1. Overall space complexity: O(n), where n is the total number of transactions
+   - self.transactions list: O(n)
+   - self.user_transactions defaultdict: O(n)
+   - The space used by individual Transaction objects: O(n)
+
+2. Additional space in analyze_transactions:
+   - alerts list: O(k), where k is the number of alerts generated (worst case O(n))
+   - Temporary variables and loop counters: O(1)
+
+Optimization Considerations:
+
+1. If the transactions are already sorted by timestamp when received, we could eliminate the sorting step,
+   reducing the time complexity to O(n).
+
+2. For very large datasets, we might consider processing transactions in batches or implementing a sliding
+   window approach to limit memory usage.
+
+3. If we need to query user transactions frequently, we could consider using a more sophisticated data 
+   structure like a balanced tree for each user's transactions, allowing for O(log m) insertion and 
+   range query times.
+
+Trade-offs:
+
+- The current implementation prioritizes simplicity and readability over absolute performance.
+- For small to medium-sized datasets, this implementation should perform adequately.
+- For very large datasets or high-frequency transaction systems, more advanced data structures and 
+  algorithms might be necessary, potentially sacrificing some readability for performance.
+"""
+
+# Example usage remains the same...
