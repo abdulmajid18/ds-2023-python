@@ -23,3 +23,16 @@ class Solution:
                 return True
 
         return len(seen_chars) == 26  # Check if all 26 letters are present
+
+
+class Solution:
+    def checkIfPangram(self, sentence: str) -> bool:
+        # List of all letters in the English alphabet
+        alphabet = 'abcdefghijklmnopqrstuvwxyz'
+
+        # Check each letter in the alphabet
+        for letter in alphabet:
+            if letter not in sentence:
+                return False  # Return False if any letter is missing
+
+        return True  # Return True if all letters are found
