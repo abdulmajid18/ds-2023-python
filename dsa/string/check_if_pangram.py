@@ -8,3 +8,18 @@ class Solution:
                 table[ascii_val] = True  # Mark the letter as seen
 
         return all(table)  # If all letters are seen, return True
+
+
+class Solution:
+    def checkIfPangram(self, sentence: str) -> bool:
+        seen_chars = set()
+
+        for char in sentence:
+            if 'a' <= char <= 'z':  # Check if the character is a lowercase letter
+                seen_chars.add(char)
+
+            # Early exit if all letters are found
+            if len(seen_chars) == 26:
+                return True
+
+        return len(seen_chars) == 26  # Check if all 26 letters are present
