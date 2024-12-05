@@ -6,7 +6,7 @@ def roman_to_integer(s):
     res = 0
 
     for i in range(len(s)):
-        if i + 1 < len(s) and roman[s[i]] < roman[s[i+1]]:
+        if i + 1 < len(s) and roman[s[i]] < roman[s[i + 1]]:
             res -= roman[s[i]]
         else:
             res += roman[s[i]]
