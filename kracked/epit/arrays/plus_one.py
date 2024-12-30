@@ -22,3 +22,9 @@ def plus_one_2(A):
         A[0] = 1
         A.insert(0, 1)
     return A
+
+
+A = "KOFI"
+
+print("Invoke the first element of the name  " + A[0] + " Yo")
+print("Yo")
