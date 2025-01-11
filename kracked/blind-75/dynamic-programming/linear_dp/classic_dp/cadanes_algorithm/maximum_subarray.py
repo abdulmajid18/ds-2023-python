@@ -23,3 +23,26 @@ def maxSubArrayBruteForceTwo(self, nums: List[int]) -> int:
             max_sum = max(max_sum, current_sum)  # Update max_sum if needed
 
     return max_sum
+
+def maxSubArray(nums: List[int]) -> int:
+    max_sum = float('-inf')
+    current_max = 0
+    for num in nums:
+        current_max = max(current_max + num, num)
+        max_sum = max(max_sum, current_max)
+
+    return max_sum
+
+
+def maxSubArray1(nums: List[int]) -> int:
+    max_sum = nums[0]
+    current_sum = 0
+
+    for num in nums:
+        if current_sum < 0:
+            current_sum = 0
+        current_sum += num
+
+        max_sum = max(max_sum, current_sum)
+
+    return max_sum
