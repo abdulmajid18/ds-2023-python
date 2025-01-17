@@ -1,5 +1,6 @@
 from itertools import combinations
 
+
 def findValidCombinations(participants, credits):
     # Input validation
     if not participants or participants <= 0:
@@ -23,6 +24,7 @@ def findValidCombinations(participants, credits):
             count = (count + 1) % MOD
 
     return count
+
 
 def print_all_valid_combinations(participants, credits):
     print(f"\nAnalyzing for participants={participants}, credits={credits}")
