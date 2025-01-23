@@ -9,6 +9,8 @@ class TreeNode:
 
 
 def levelOrder(root: TreeNode):
+    if not root:
+        return None
     res = []
 
     q = deque()
@@ -19,9 +21,10 @@ def levelOrder(root: TreeNode):
         level = []
         for i in range(qLen):
             node = q.popleft()
-            if node:
-                level.append(node.data)
+            level.append(node.data)
+            if node.left:
                 q.append(node.left)
+            if node.right:
                 q.append(node.right)
         if level:
             res.append(level)
