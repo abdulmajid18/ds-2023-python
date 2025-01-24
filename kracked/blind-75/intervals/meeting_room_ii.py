@@ -28,3 +28,25 @@ def minMeetingRooms(intervals):
 
     # Step 3: The size of the heap is the number of meeting rooms needed
     return len(min_heap)
+
+
+def minMeetingRoomsB(intervals):
+    events = []
+
+    # Step 1: Transform intervals into events
+    for start, end in intervals:
+        events.append((start, 1))  # Meeting starts
+        events.append((end, -1))  # Meeting ends
+
+    # Step 2: Sort events
+    events.sort(key=lambda x: (x[0], x[1]))
+
+    # Step 3: Scan line
+    count = 0
+    max_rooms = 0
+
+    for _, value in events:
+        count += value
+        max_rooms = max(max_rooms, count)
+
+    return max_rooms
