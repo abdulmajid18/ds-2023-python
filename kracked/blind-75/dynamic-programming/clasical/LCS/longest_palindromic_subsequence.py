@@ -73,3 +73,36 @@ def longestPalindromeSubseq2(s: str) -> int:
 
     # The result is the LCS of s and rev_s
     return dp[n][n]
+
+
+class Solution:
+    def longestPalindromeSubseqdfs(self, s: str) -> int:
+        n = len(s)
+
+        # Use memoization to store results of subproblems
+        memo = {}
+
+        # Helper function to calculate the longest palindromic subsequence recursively
+        def lps(left, right):
+            # Base case: if the left index exceeds the right index
+            if left > right:
+                return 0
+            # Base case: if left equals right, it's a single character
+            if left == right:
+                return 1
+
+            # Check if the result is already computed
+            if (left, right) in memo:
+                return memo[(left, right)]
+
+            # Case 1: Characters match
+            if s[left] == s[right]:
+                memo[(left, right)] = 2 + lps(left + 1, right - 1)
+            else:
+                # Case 2: Characters don't match
+                memo[(left, right)] = max(lps(left + 1, right), lps(left, right - 1))
+
+            return memo[(left, right)]
+
+        # Start the recursion from the first and last characters
+        return lps(0, n - 1)
