@@ -44,3 +44,49 @@ graph = {
 
 # Call BFS
 bfs(visited, graph, 'A')
+
+from collections import deque
+
+
+def bfs2(graph, start_node):
+    """
+    Perform Breadth-First Search (BFS) on a graph starting from the given node.
+
+    Args:
+    graph: Dictionary representing the adjacency list of the graph.
+    start_node: The node to start BFS from.
+
+    Returns:
+    List of nodes in BFS traversal order.
+    """
+    visited = set()  # Use a set for efficient O(1) lookups
+    queue = deque([start_node])  # Use deque for efficient queue operations
+    traversal_order = []  # Store the order of visited nodes
+
+    while queue:
+        current_node = queue.popleft()  # Dequeue the next node
+        if current_node not in visited:
+            traversal_order.append(current_node)
+            visited.add(current_node)  # Mark the node as visited
+
+            # Enqueue all unvisited neighbors
+            for neighbor in graph[current_node]:
+                if neighbor not in visited:
+                    queue.append(neighbor)
+
+    return traversal_order
+
+
+# Example Graph as an adjacency list
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+# Call BFS
+result = bfs(graph, 'A')
+print("BFS Traversal Order:", result)
