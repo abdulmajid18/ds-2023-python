@@ -90,3 +90,49 @@ graph = {
 # Call BFS
 result = bfs(graph, 'A')
 print("BFS Traversal Order:", result)
+
+
+from collections import deque
+
+def bfs3(graph, start):
+    # Initialize the visited set and distance dictionary
+    visited = set()
+    distance = {}
+
+    # Initialize the queue with the starting node
+    queue = deque([start])
+    visited.add(start)
+    distance[start] = 0  # Distance to the starting node is 0
+
+    # Perform BFS
+    while queue:
+        current = queue.popleft()
+        print(f"Processing node: {current}, Distance from start: {distance[current]}")
+
+        # Explore neighbors of the current node
+        for neighbor in graph[current]:
+            if neighbor not in visited:
+                visited.add(neighbor)
+                distance[neighbor] = distance[current] + 1  # Update the distance
+                queue.append(neighbor)  # Add to queue for further processing
+
+    return distance  # Return distances for all reachable nodes
+
+# Example Graph (Adjacency List)
+graph = {
+    0: [1, 2],
+    1: [0, 3, 4],
+    2: [0, 5],
+    3: [1],
+    4: [1],
+    5: [2]
+}
+
+# Perform BFS from starting node 0
+start_node = 0
+distances = bfs3(graph, start_node)
+
+# Output the distances from the starting node
+print("\nShortest distances from the starting node:")
+for node, dist in distances.items():
+    print(f"Node {node}: Distance {dist}")
