@@ -18,3 +18,19 @@ def lengthOfLIS(nums):
                 dp[i] = max(dp[i], dp[j] + 1)
 
     return max(dp)
+
+
+from bisect import bisect_left
+
+
+def lengthOfLIS(nums):
+    q = []  # To maintain the increasing subsequence
+
+    for num in nums:
+        pos = bisect_left(q, num)  # Find the first position >= num
+        if pos == len(q):
+            q.append(num)  # Append if num is larger than all in q
+        else:
+            q[pos] = num  # Replace to maintain the tight sequence
+
+    return len(q)
