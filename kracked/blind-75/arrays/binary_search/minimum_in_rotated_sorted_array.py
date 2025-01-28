@@ -23,3 +23,44 @@ def findMin(nums):
 
     # At the end of the loop, left == right, pointing to the minimum element.
     return nums[left]
+
+
+def findMinTwo(nums):
+    res = nums[0]
+    i, j = 0, len(nums) - 1
+
+    while i <= j:
+        # If the current subarray is already sorted
+        if nums[i] < nums[j]:
+            res = min(res, nums[i])
+            break
+
+        m = (i + j) // 2
+        res = min(res, nums[m])
+
+        # Narrow down the search space
+        if nums[m] >= nums[i]:
+            i = m + 1  # Move to the right half
+        else:
+            j = m - 1  # Move to the left half
+
+    return res
+
+
+class Solution:
+    def findMin(self, nums):
+        i, j = 0, len(nums) - 1
+
+        # If the array is not rotated (or has only one element), return the first element
+        if nums[j] >= nums[i]:
+            return nums[i]
+
+        # Binary search to find the minimum element
+        while i < j:
+            k = i + (j - i) // 2
+            if nums[k] >= nums[0]:
+                i = k + 1
+            else:
+                j = k
+
+        return nums[i]
