@@ -15,3 +15,19 @@ def moveZeroes(nums):
 nums = [0, 1, 0, 3, 12]
 moveZeroes(nums)
 print(nums)  # Output: [1, 3, 12, 0, 0]
+
+
+def moveZeroes(nums):
+    lastNonZeroIndex = 0  # Pointer to track the position for non-zero elements
+
+    # Iterate through the array
+    for i in range(len(nums)):
+        if nums[i] != 0:
+            # Swap elements at i and lastNonZeroIndex
+            nums[lastNonZeroIndex], nums[i] = nums[i], nums[lastNonZeroIndex]
+            lastNonZeroIndex += 1
+
+# Example
+nums = [0, 1, 0, 3, 12]
+moveZeroes(nums)
+print(nums)  # Output: [1, 3, 12, 0, 0]
