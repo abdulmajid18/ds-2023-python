@@ -91,8 +91,8 @@ graph = {
 result = bfs(graph, 'A')
 print("BFS Traversal Order:", result)
 
-
 from collections import deque
+
 
 def bfs3(graph, start):
     # Initialize the visited set and distance dictionary
@@ -118,6 +118,7 @@ def bfs3(graph, start):
 
     return distance  # Return distances for all reachable nodes
 
+
 # Example Graph (Adjacency List)
 graph = {
     0: [1, 2],
@@ -136,3 +137,23 @@ distances = bfs3(graph, start_node)
 print("\nShortest distances from the starting node:")
 for node, dist in distances.items():
     print(f"Node {node}: Distance {dist}")
+
+from collections import deque
+
+
+def iterative_bfs(graph, start):
+    queue = deque([start])
+    visited = set([start])
+
+    while queue:
+        node = queue.popleft()
+        print(node, end=" ")
+
+        for neighbor in graph[node]:
+            if neighbor not in visited:
+                visited.add(neighbor)
+                queue.append(neighbor)
+
+
+# Run Iterative BFS
+iterative_bfs(graph, 0)
