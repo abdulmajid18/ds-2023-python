@@ -104,38 +104,41 @@ def union_of_sorted_arrays_optimal(arr1, arr2):
     Time Complexity: O(n + m)
     Space Complexity: O(n + m) for the result array.
     """
-    i, j = 0, 0
-    result = []
+    i, j = 0, 0  # Initialize pointers for arr1 and arr2
+    union = []  # Vector to store the union
 
+    # Traverse both arrays simultaneously
     while i < len(arr1) and j < len(arr2):
-        # Avoid duplicates by checking the current element in the result
-        if arr1[i] < arr2[j]:
-            if not result or result[-1] != arr1[i]:
-                result.append(arr1[i])
+        if arr1[i] == arr2[j]:
+            # If both elements are equal, add only one and move both pointers
+            if not union or union[-1] != arr1[i]:
+                union.append(arr1[i])
             i += 1
-        elif arr1[i] > arr2[j]:
-            if not result or result[-1] != arr2[j]:
-                result.append(arr2[j])
             j += 1
-        else:  # arr1[i] == arr2[j]
-            if not result or result[-1] != arr1[i]:
-                result.append(arr1[i])
+        elif arr1[i] < arr2[j]:
+            # If arr1[i] is smaller, add arr1[i] and move pointer i
+            if not union or union[-1] != arr1[i]:
+                union.append(arr1[i])
             i += 1
+        else:
+            # If arr1[i] is larger, add arr2[j] and move pointer j
+            if not union or union[-1] != arr2[j]:
+                union.append(arr2[j])
             j += 1
 
     # Add remaining elements from arr1
     while i < len(arr1):
-        if not result or result[-1] != arr1[i]:
-            result.append(arr1[i])
+        if not union or union[-1] != arr1[i]:
+            union.append(arr1[i])
         i += 1
 
     # Add remaining elements from arr2
     while j < len(arr2):
-        if not result or result[-1] != arr2[j]:
-            result.append(arr2[j])
+        if not union or union[-1] != arr2[j]:
+            union.append(arr2[j])
         j += 1
 
-    return result
+    return union
 
 
 # Example usage:
