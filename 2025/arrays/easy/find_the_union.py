@@ -11,6 +11,7 @@ def union_of_arrays_brute(a, b):
 a = [1, 2, 3, 4, 5]
 b = [1, 2, 3, 6, 7]
 
+
 # result = union_of_arrays_brute(a, b)
 # print("Union of arrays:", result)
 
@@ -73,10 +74,66 @@ def union_of_sorted_arrays(arr1, arr2):
     for num in arr2:
         freq_map[num] += 1
 
-
     # Extract the sorted keys of the map as the union
     result = sorted(freq_map.keys())
 
+    return result
+
+
+# Example usage:
+arr1 = [1, 2, 3, 4, 5]
+arr2 = [1, 2, 3, 6, 7]
+
+result = union_of_sorted_arrays(arr1, arr2)
+print("Union of arrays:", result)
+
+
+# Output: Union of arrays: [1, 2, 3, 4, 5, 6, 7]
+
+def union_of_sorted_arrays_optimal(arr1, arr2):
+    """
+    Find the union of two sorted arrays in O(n + m) time without sorting.
+    The union should contain distinct elements, and the result should be sorted.
+
+    Approach:
+    - Use two pointers to traverse both arrays.
+    - If the elements pointed to by both pointers are the same, add the element to the result and move both pointers.
+    - If one element is smaller, move the pointer for that array.
+    - Continue until both arrays are fully traversed.
+
+    Time Complexity: O(n + m)
+    Space Complexity: O(n + m) for the result array.
+    """
+    i, j = 0, 0
+    result = []
+
+    while i < len(arr1) and j < len(arr2):
+        # Avoid duplicates by checking the current element in the result
+        if arr1[i] < arr2[j]:
+            if not result or result[-1] != arr1[i]:
+                result.append(arr1[i])
+            i += 1
+        elif arr1[i] > arr2[j]:
+            if not result or result[-1] != arr2[j]:
+                result.append(arr2[j])
+            j += 1
+        else:  # arr1[i] == arr2[j]
+            if not result or result[-1] != arr1[i]:
+                result.append(arr1[i])
+            i += 1
+            j += 1
+
+    # Add remaining elements from arr1
+    while i < len(arr1):
+        if not result or result[-1] != arr1[i]:
+            result.append(arr1[i])
+        i += 1
+
+    # Add remaining elements from arr2
+    while j < len(arr2):
+        if not result or result[-1] != arr2[j]:
+            result.append(arr2[j])
+        j += 1
 
     return result
 
@@ -89,4 +146,3 @@ result = union_of_sorted_arrays(arr1, arr2)
 print("Union of arrays:", result)
 
 # Output: Union of arrays: [1, 2, 3, 4, 5, 6, 7]
-
