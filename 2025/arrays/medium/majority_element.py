@@ -30,3 +30,14 @@ class Solution:
 
             if freq_map[num] > n // 2:  # Check majority condition
                 return num
+
+    def majorityElementBoyerMoore(self, nums: List[int]) -> int:
+        res, count = 0, 0
+
+        for n in nums:
+            if count == 0:
+                res = n
+
+            count += (1 if n == res else -1)
+        return res
+
