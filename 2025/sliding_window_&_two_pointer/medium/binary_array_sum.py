@@ -50,17 +50,19 @@ def numSubarraysWithSumTwo(self, nums: List[int], goal: int) -> int:
     return ans
 
 
-def numSubarraysWithSumTwoPointer(nums, goal):
-    def atMost(k):
-        if k < 0:
+def numSubarrayWithSumSlidingWindow(nums, goal):
+    def atMost(S):
+        if S < 0:
             return 0
-        left = total = 0
-        for right, val in enumerate(nums):
-            k -= val
-            while k < 0:
-                k += nums[left]
+        left = 0
+        count = 0
+        current_sum = 0
+        for right in range(len(nums)):
+            current_sum += nums[right]
+            while current_sum > S:
+                current_sum -= nums[left]
                 left += 1
-            total += right - left + 1
-        return total
+            count += right - left + 1
+        return count
 
     return atMost(goal) - atMost(goal - 1)
