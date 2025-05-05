@@ -17,7 +17,6 @@ def quick_sort(arr, low, high):
         quick_sort(arr, low, pi - 1)
         quick_sort(arr, pi + 1, high)
 
-    # Example usage
 
 
 nums = [10, 7, 8, 9, 1, 5]
