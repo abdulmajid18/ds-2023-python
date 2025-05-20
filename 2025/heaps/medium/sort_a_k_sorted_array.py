@@ -52,6 +52,7 @@ def sort_k_sorted(nums, k):
 
 
 def sort_k_sorted_inplace(a, k):
+    
     heap = a[:k + 1]
     heapq.heapify(heap)
     target = 0
