@@ -21,32 +21,26 @@ class Solution:
 
 
 def divideBit(dividend: int, divisor: int) -> int:
-    INT_MAX = 2**31 - 1
-    INT_MIN = -2**31
+    # Handle overflow case
+    if dividend == -2 ** 31 and divisor == -1:
+        return 2 ** 31 - 1
 
-    # Edge case: overflow
-    if dividend == INT_MIN and divisor == -1:
-        return INT_MAX
+    sign = -1 if (dividend > 0) ^ (divisor > 0) else 1
 
-    negatives = 2
-    if dividend > 0:
-        dividend = -dividend
-        negatives -= 1
-    if divisor > 0:
-        divisor = -divisor
-        negatives -= 1
+    dividend = abs(dividend)
+    divisor = abs(divisor)
 
     quotient = 0
 
-    while dividend <= divisor:
-        power_of_two = 1
-        value = divisor
+    while dividend >= divisor:
+        # Find the largest power of 2 multiplier
+        temp_divisor, multiplier = divisor, 1
+        while temp_divisor << 1 <= dividend:
+            temp_divisor <<= 1
+            multiplier <<= 1
 
-        while value >= INT_MIN >> 1 and dividend <= value + value:
-            value += value           # value <<= 1
-            power_of_two += power_of_two  # power_of_two <<= 1
+        # Subtract and accumulate the quotient
+        dividend -= temp_divisor
+        quotient += multiplier
 
-        dividend -= value
-        quotient += power_of_two
-
-    return quotient if negatives != 1 else -quotient
+    return sign * quotient
