@@ -40,3 +40,22 @@ node2.add_neighbor(node3)
 
 visited_nodes = set()
 dfs_adjacency_list(node1, visited_nodes)
+
+
+def dfs_iterative(graph, start):
+    visited = set()
+    stack = [start]
+    result = []
+
+    while stack:
+        node = stack.pop()
+        if node not in visited:
+            visited.add(node)
+            result.append(node)
+
+            # Add neighbors in reverse order for consistent left-to-right traversal
+            for neighbor in reversed(graph.get(node, [])):
+                if neighbor not in visited:
+                    stack.append(neighbor)
+
+    return result
