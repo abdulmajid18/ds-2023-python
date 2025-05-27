@@ -1,4 +1,3 @@
-# Definition for a binary tree node.
 from typing import Optional, List
 
 
@@ -7,23 +6,22 @@ class TreeNode:
         self.val = val
         self.left = left
         self.right = right
+
 class Solution:
-    def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+    def postorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
         res = []
 
-        def dfs(root, res):
-            if root:
-                res.append(root.val)
-                dfs(root.left, res)
-                dfs(root.right, res)
+        def dfs(node):
+            if node:
+                dfs(node.left)      # Left
+                dfs(node.right)     # Right
+                res.append(node.val)  # Visit
 
-        dfs(root, res)
-
+        dfs(root)
         return res
 
-
 class Solution:
-    def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+    def postorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
         if not root:
             return []
 
@@ -33,9 +31,9 @@ class Solution:
         while stack:
             node = stack.pop()
             res.append(node.val)
-            if node.right:
-                stack.append(node.right)
             if node.left:
                 stack.append(node.left)
+            if node.right:
+                stack.append(node.right)
 
-        return res
+        return res[::-1]  # Reverse the result for post-order

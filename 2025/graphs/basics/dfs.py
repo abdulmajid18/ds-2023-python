@@ -36,6 +36,7 @@ def dfs_iterative(graph, start):
             visited.add(node)
             stack.extend(reversed(graph.get(node, [])))  # Reverse to maintain correct order
 
+
 # Run Iterative DFS
 print("\nDFS Iterative Traversal:")
 dfs_iterative(graph, 'A')
