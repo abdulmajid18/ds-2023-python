@@ -36,4 +36,4 @@ class Solution:
             if node.right:
                 stack.append(node.right)
 
-        return res[::-1]  # Reverse the result for post-order
+        return res[::-1]
