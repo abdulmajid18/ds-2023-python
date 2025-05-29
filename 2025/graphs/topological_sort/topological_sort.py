@@ -40,3 +40,28 @@ g.add_edge(2, 3)
 g.add_edge(3, 1)
 
 print("Topological Sort (DFS):", g.topological_sort_dfs())
+def topological_sort(graph):
+    visited = set()
+    res = []
+    def dfs(node):
+        visited.add(node)
+        for neighbor in graph[node]:
+            if neighbor not in visited:
+                dfs(neighbor)
+        res.append(node)
+
+    for node in graph.keys():
+        if node not in visited:
+            dfs(node)
+
+    return res[::-1]
+
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D'],
+    'C': ['D'],
+    'D': []
+}
+
+print(topological_sort(graph))
+# Output: ['A', 'C', 'B', 'D'] or another valid topological order
