@@ -44,6 +44,27 @@ def findCircleNumDFS(isConnected: List[List[int]]) -> int:
     return provinces
 
 
+def findCircleNumDFSA(isConnected: List[List[int]]) -> int:
+
+    def dfs(node):
+        for neighbor in range(len(isConnected[0])):
+            if isConnected[node][neighbor] == 1 and neighbor not in visited:
+                visited.add(neighbor)
+                dfs(neighbor)
+
+    provinces = 0
+    visited = set()
+
+    nodes = len(isConnected)
+
+    for node in range(nodes):
+        if node not in visited:
+            dfs(node)
+            provinces += 1
+
+    return provinces
+
+
 def findCircleNumBFS(isConnected: List[List[int]]) -> int:
     n = len(isConnected)
     visited = set()
