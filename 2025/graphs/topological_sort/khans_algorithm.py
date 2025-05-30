@@ -198,3 +198,30 @@ matrix = [
 ]
 print(matrix_topo_sort(matrix))
 
+
+from collections import defaultdict, deque
+
+def topo_sort_adj_list(graph, V):
+    in_degree = defaultdict(int)  # Automatically 0 for unseen keys
+
+    # Step 1: Compute in-degrees
+    for u in graph:
+        for v in graph[u]:
+            in_degree[v] += 1
+
+    # Step 2: Collect nodes with in-degree 0
+    queue = deque([i for i in range(V) if in_degree[i] == 0])
+    result = []
+
+    # Step 3: Kahn’s Algorithm
+    while queue:
+        u = queue.popleft()
+        result.append(u)
+        for v in graph[u]:
+            in_degree[v] -= 1
+            if in_degree[v] == 0:
+                queue.append(v)
+
+    if len(result) != V:
+        return []  # Cycle detected
+    return result
