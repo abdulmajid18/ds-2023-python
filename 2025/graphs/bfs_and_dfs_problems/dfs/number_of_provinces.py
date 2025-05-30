@@ -86,3 +86,27 @@ def findCircleNumBFS(isConnected: List[List[int]]) -> int:
 
     return provinces
 
+from collections import deque
+
+def findCircleNum(isConnected):
+    n = len(isConnected)
+    visited = set()
+    provinces = 0
+
+    def bfs(start):
+        queue = deque([start])
+        while queue:
+            u = queue.popleft()
+            for v in range(n):
+                if isConnected[u][v] == 1 and v not in visited:
+                    visited.add(v)
+                    queue.append(v)
+
+    for i in range(n):
+        if i not in visited:
+            visited.add(i)
+            bfs(i)
+            provinces += 1
+
+    return provinces
+
