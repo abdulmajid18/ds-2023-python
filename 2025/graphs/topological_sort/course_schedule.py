@@ -92,3 +92,53 @@ class SolutionDFS:
                     return False
 
         return True
+
+from collections import defaultdict, deque
+
+def canFinish(numCourses, prerequisites):
+    graph = defaultdict(list)
+    in_degree = [0] * numCourses
+
+    for dest, src in prerequisites:
+        graph[src].append(dest)
+        in_degree[dest] += 1
+
+    # Queue for nodes with in-degree 0
+    queue = deque([i for i in range(numCourses) if in_degree[i] == 0])
+    visited = 0
+
+    while queue:
+        course = queue.popleft()
+        visited += 1
+        for neighbor in graph[course]:
+            in_degree[neighbor] -= 1
+            if in_degree[neighbor] == 0:
+                queue.append(neighbor)
+
+    return visited == numCourses
+
+
+def canFinish(numCourses, prerequisites):
+    graph = [[] for _ in range(numCourses)]
+    for dest, src in prerequisites:
+        graph[src].append(dest)
+
+    visited = [0] * numCourses  # 0 = unvisited, 1 = visiting, 2 = visited
+
+    def dfs(course):
+        if visited[course] == 1:  # cycle detected
+            return False
+        if visited[course] == 2:
+            return True
+
+        visited[course] = 1  # mark as visiting
+        for neighbor in graph[course]:
+            if not dfs(neighbor):
+                return False
+        visited[course] = 2  # mark as visited
+        return True
+
+    for course in range(numCourses):
+        if not dfs(course):
+            return False
+    return True
