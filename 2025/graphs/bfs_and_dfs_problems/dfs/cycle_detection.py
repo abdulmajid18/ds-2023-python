@@ -90,6 +90,65 @@ g.add_edge(3, 1)  # Introduces a cycle
 
 print("Graph has a cycle:" if g.is_cyclic() else "Graph has no cycle.")
 
+def detect_cycle_topo_sort_dfs(vertices, edges):
+    graph = {i: [] for i in range(vertices)}
+    for u, v in edges:
+        graph[u].append(v)
+
+    state = [0] * vertices  # 0=unvisited, 1=visiting, 2=visited
+
+    def dfs(node):
+        if state[node] == 1:  # Found a back edge → cycle
+            return True
+        if state[node] == 2:
+            return False
+
+        state[node] = 1
+        for neighbor in graph[node]:
+            if dfs(neighbor):
+                return True
+        state[node] = 2
+        return False
+
+    for node in range(vertices):
+        if state[node] == 0:
+            if dfs(node):
+                return True
+    return False
+
+class TopologicalSorter:
+    def __init__(self, graph):
+        self.graph = graph
+        self.visited = set()
+        self.rec_stack = set()
+        self.stack = []
+        self.has_cycle = False
+
+    def dfs(self, node):
+        self.visited.add(node)
+        self.rec_stack.add(node)
+
+        for neighbor in self.graph.get(node, []):
+            if neighbor not in self.visited:
+                if self.dfs(neighbor):
+                    return True  # Cycle detected
+            elif neighbor in self.rec_stack:
+                return True  # Cycle found
+
+        self.rec_stack.remove(node)
+        self.stack.append(node)
+        return False
+
+    def sort(self):
+        for node in self.graph:
+            if node not in self.visited:
+                if self.dfs(node):
+                    self.has_cycle = True
+                    return None  # Cycle detected
+
+        # Reverse the stack to get topological order
+        return self.stack[::-1]
+
 
 if __name__ == "__main__":
     V = 4

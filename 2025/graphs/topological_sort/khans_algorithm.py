@@ -225,3 +225,88 @@ def topo_sort_adj_list(graph, V):
     if len(result) != V:
         return []  # Cycle detected
     return result
+
+
+from collections import deque, defaultdict
+
+def detect_cycle_topo_sort_kahn(vertices, edges):
+    graph = defaultdict(list)
+    indegree = defaultdict(int)
+
+    # Initialize graph
+    for u, v in edges:
+        graph[u].append(v)
+        indegree[v] += 1
+        if u not in indegree:
+            indegree[u] = 0
+
+    queue = deque([node for node in indegree if indegree[node] == 0])
+    visited_count = 0
+
+    while queue:
+        node = queue.popleft()
+        visited_count += 1
+        for neighbor in graph[node]:
+            indegree[neighbor] -= 1
+            if indegree[neighbor] == 0:
+                queue.append(neighbor)
+
+    return visited_count != len(indegree)
+
+def topological_sort_dfs(vertices, edges):
+    from collections import defaultdict
+
+    graph = defaultdict(list)
+    for u, v in edges:
+        graph[u].append(v)
+
+    visited = set()
+    in_path = set()
+    result = []
+
+    def dfs(node):
+        if node in in_path:
+            return True  # cycle detected
+        if node in visited:
+            return False
+
+        in_path.add(node)
+        for neighbor in graph[node]:
+            if dfs(neighbor):
+                return True
+        in_path.remove(node)
+        visited.add(node)
+        result.append(node)  # Add after visiting children (post-order)
+        return False
+
+    for node in range(vertices):
+        if node not in visited:
+            if dfs(node):
+                return None  # cycle detected → topological sort not possible
+
+    return result[::-1]  # reverse to get topological order
+
+class TopoSort:
+    def dfs(self,graph, vertex, stack, visited):
+        visited.add(vertex)
+
+        for neighbor in graph[vertex]:
+            if neighbor not in visited:
+                self.dfs(graph, neighbor, stack, visited)
+
+        stack.append(vertex)
+
+
+
+    def topological_sort(self, graph):
+        stack = []
+        visited = set()
+
+        for vertex in graph:
+            if vertex not in visited:
+                self.dfs(graph, vertex, stack, visited)
+
+        ordering = []
+        while stack:
+            ordering.append(stack.pop())
+        return ordering
