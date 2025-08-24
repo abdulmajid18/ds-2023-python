@@ -4,7 +4,7 @@ def infix_to_postfix(expression):
     output = []
 
     for token in expression.replace(" ", ''):
-        if token.is_digit():
+        if token.isdigit():
             output.append(token)
         elif token == '(':
             stack.append(token)
@@ -15,8 +15,11 @@ def infix_to_postfix(expression):
         else:
             while stack and stack[-1] != '(' and precedence[stack[-1]] >= precedence[token]:
                 output.append(stack.pop())
-            output.append(token)
+            stack.append(token)
     while stack:
         output.append(stack.pop())
 
     return " ".join(output)
+
+
+print(infix_to_postfix("(3+4)*5-6"))  # 3 4 + 5 * 6 -
