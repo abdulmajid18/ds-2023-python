@@ -8,3 +8,7 @@ class Solution:
                 n //= p
 
         return n == 1
+
+
+a = [1] * 4
+print(a)
