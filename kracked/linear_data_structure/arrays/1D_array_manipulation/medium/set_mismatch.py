@@ -1,3 +1,6 @@
+from typing import List
+
+
 class Solution:
     def findErrorNums(self, nums: List[int]) -> List[int]:
         n = len(nums)
@@ -15,3 +18,4 @@ class Solution:
         for i in range(n):
             if nums[i] != i + 1:
                 return [nums[i], i + 1]
+        return None
