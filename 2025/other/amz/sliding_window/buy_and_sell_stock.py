@@ -73,4 +73,4 @@ class SolutionTwo:
 # Example Usage
 prices = [7, 1, 5, 3, 6, 4]
 sol = Solution()
-print(sol.maxProfit(prices))  # Output: 5
+print(maxProfit(prices))  # Output: 5
